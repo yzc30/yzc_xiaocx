@@ -25,6 +25,27 @@
 			}
 		}
 	],
+	"subPackages": [
+		{
+			"root": "subpkg",
+			"pages": [{
+				"path" : "goods_detail/goods_detail",
+				"style" : 
+				{
+					"navigationBarTitleText" : "aaaaaaaaaaaa",
+					"enablePullDownRefresh" : false
+				}
+			},
+			{
+				"path" : "goods_list/goods_list",
+				"style" : 
+				{
+					"navigationBarTitleText" : "",
+					"enablePullDownRefresh" : false
+				}
+			}]
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "商城",
