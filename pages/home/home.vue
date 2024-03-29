@@ -1,5 +1,9 @@
 <template>
 	<view>
+		<!-- 搜索区域 -->
+		<view class="search-box">
+			<Yzc-my-search @click="gotoSearch"></Yzc-my-search>
+		</view>
 		<!-- 轮播图区域 -->
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" circular="true">
 			<swiper-item v-for="(item,i) in swiperList" :key="i">
@@ -113,11 +117,23 @@
 					url:this.floorList[0].product_list[0].url,
 				})
 			},
+			gotoSearch(){
+				uni.navigateTo({
+					url:"/subpkg/search/search"
+				})
+			},
 		}
 	}
 </script>
 
 <style lang="scss">
+	
+	.search-box{
+		position: sticky;
+		top:0;
+		z-index: 999;
+	}
+	
 	swiper {
 		height: 300rpx;
 
