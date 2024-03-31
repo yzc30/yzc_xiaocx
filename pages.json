@@ -1,6 +1,5 @@
 {
-	"pages": [
-		{
+	"pages": [{
 			"path": "pages/home/home",
 			"style": {
 				"enablePullDownRefresh": false
@@ -25,35 +24,33 @@
 			}
 		}
 	],
-	"subPackages": [
-		{
-			"root": "subpkg",
-			"pages": [{
-				"path" : "goods_detail/goods_detail",
-				"style" : 
-				{
-					"navigationBarTitleText" : "aaaaaaaaaaaa",
-					"enablePullDownRefresh" : false
+	"subPackages": [{
+		"root": "subpkg",
+		"pages": [{
+				"path": "goods_detail/goods_detail",
+				"style": {
+					"navigationBarTitleText": "aaaaaaaaaaaa",
+					"enablePullDownRefresh": false
 				}
 			},
 			{
-				"path" : "goods_list/goods_list",
-				"style" : 
-				{
-					"navigationBarTitleText" : "",
-					"enablePullDownRefresh" : false
+				"path": "goods_list/goods_list",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": true,
+					"onReachBottomDistance": 50,
+					"backgroundColor": "#F8F8F8"
 				}
 			},
 			{
-				"path" : "search/search",
-				"style" : 
-				{
-					"navigationBarTitleText" : "",
-					"enablePullDownRefresh" : false
+				"path": "search/search",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
 				}
-			}]
-		}
-	],
+			}
+		]
+	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "商城",
@@ -64,9 +61,8 @@
 		}
 	},
 	"tabBar": {
-		"selectedColor":"#C00000",
-		"list": [
-			{
+		"selectedColor": "#C00000",
+		"list": [{
 				"pagePath": "pages/home/home",
 				"text": "首页",
 				"iconPath": "static/tab_icons/home.png",
@@ -92,14 +88,12 @@
 			}
 		]
 	},
-	"condition" : { //模式配置，仅开发期间生效
+	"condition": { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)
-		"list": [
-			{
-				"name": "", //模式名称
-				"path": "", //启动页面，必选
-				"query": "" //启动参数，在页面的onLoad函数里面得到
-			}
-		]
+		"list": [{
+			"name": "", //模式名称
+			"path": "", //启动页面，必选
+			"query": "" //启动参数，在页面的onLoad函数里面得到
+		}]
 	}
 }
