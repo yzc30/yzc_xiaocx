@@ -9,9 +9,9 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/cate/cate",
-          "pathName": "pages/cate/cate",
-          "query": "",
+          "name": "subpkg/goods_list/goods_list",
+          "pathName": "subpkg/goods_list/goods_list",
+          "query": "cid=5",
           "launchMode": "default",
           "scene": null
         }

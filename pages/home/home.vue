@@ -78,7 +78,7 @@
 					url: "https://api-hmugo-web.itheima.net/api/public/v1/home/catitems",
 					method: "GET"
 				})
-				console.log(res)
+				// console.log(res)
 				if (res[1].statusCode != 200) {
 					uni.$showMsg()
 				}
