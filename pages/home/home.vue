@@ -19,7 +19,7 @@
 				<image class="nav-img" :src="item.image_src"></image>
 			</view>
 		</view>
-		
+
 		<!-- 楼层区域 -->
 		<view class="floor-list">
 			<view class="floor-item" v-for="(item,i) in floorList" :key="i">
@@ -29,28 +29,34 @@
 				<view class="floor-img-box">
 					<!-- 左 -->
 					<view class="left-img-box" @click="leftImgBoxClick">
-						<image :src="item.product_list[0].image_src" style="{width: item.product_list[0].image_width + 'rpx';}" mode="heightFix"></image>
+						<image :src="item.product_list[0].image_src"
+							style="{width: item.product_list[0].image_width + 'rpx';}" mode="heightFix"></image>
 					</view>
 					<!-- 右 -->
 					<view class="rigth-img-box">
-						<navigator class="rigth-img-item" v-for="(item2,i2) in item.product_list" :key="i2" v-if="i2!==0" :url="item2.url">
-							<image  :src="item2.image_src" mode="widthFix"></image>
+						<navigator class="rigth-img-item" v-for="(item2,i2) in item.product_list" :key="i2"
+							v-if="i2!==0" :url="item2.url">
+							<image :src="item2.image_src" mode="widthFix"></image>
 						</navigator>
 					</view>
 				</view>
 			</view>
 		</view>
-		
+
 	</view>
 </template>
 
 <script>
+	//导入mixins模块
+	import badgeMix from "@/mixins/tabbar-badge.js"
 	export default {
+		// 将badgeMix混入当前页面进行使用
+		mixins: [badgeMix],
 		data() {
 			return {
 				swiperList: [],
 				navList: [],
-				floorList:[],
+				floorList: [],
 			};
 		},
 		onLoad() {
@@ -85,15 +91,15 @@
 				this.navList = res[1].data.message
 				// console.log(this.navList)
 			},
-			navClickHandler(item){
+			navClickHandler(item) {
 				// console.log(item)
-				if (item.name == "分类" ){
+				if (item.name == "分类") {
 					uni.switchTab({
-						url:"/pages/cate/cate"
+						url: "/pages/cate/cate"
 					})
 				}
 			},
-			async getFloorList(){
+			async getFloorList() {
 				const res = await uni.request({
 					url: "https://api-hmugo-web.itheima.net/api/public/v1/home/floordata",
 					method: "GET"
@@ -102,24 +108,24 @@
 				if (res[1].statusCode != 200) {
 					uni.$showMsg()
 				}
-				
-				res[1].data.message.forEach(floor=>{
-					floor.product_list.forEach(prod=>{
+
+				res[1].data.message.forEach(floor => {
+					floor.product_list.forEach(prod => {
 						prod.url = '/subpkg/goods_list/goods_list?' + prod.navigator_url.split("?")[1]
 					})
 				})
 				this.floorList = res[1].data.message
 				// console.log(this.floorList)
 			},
-			leftImgBoxClick(){
+			leftImgBoxClick() {
 				console.log(this.floorList[0].product_list[0].url)
 				uni.navigateTo({
-					url:this.floorList[0].product_list[0].url,
+					url: this.floorList[0].product_list[0].url,
 				})
 			},
-			gotoSearch(){
+			gotoSearch() {
 				uni.navigateTo({
-					url:"/subpkg/search/search"
+					url: "/subpkg/search/search"
 				})
 			},
 		}
@@ -127,13 +133,12 @@
 </script>
 
 <style lang="scss">
-	
-	.search-box{
+	.search-box {
 		position: sticky;
-		top:0;
+		top: 0;
 		z-index: 999;
 	}
-	
+
 	swiper {
 		height: 300rpx;
 
@@ -148,35 +153,35 @@
 		display: flex;
 		justify-content: space-around;
 		margin: 15rpx 0;
-		
+
 
 		.nav-img {
 			width: 128rpx;
 			height: 140rpx;
 		}
 	}
-	
-	.floor-title{
+
+	.floor-title {
 		height: 60rpx;
 		width: 100%;
 		display: flex;
 	}
-	
-	.rigth-img-box{
+
+	.rigth-img-box {
 		display: flex;
 		flex-wrap: wrap;
 		padding: 5rpx;
 	}
-	
-	.rigth-img-item{
+
+	.rigth-img-item {
 		display: flex;
 		width: 200rpx;
 		flex-wrap: wrap;
 		justify-content: space-around;
 		padding: 1rpx;
 	}
-	
-	.floor-img-box{
+
+	.floor-img-box {
 		display: flex;
 		padding: 20rpx;
 	}

@@ -25,7 +25,33 @@
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations,
+		mapGetters
+	} from 'vuex'
+
 	export default {
+		computed: {
+			//映射
+			...mapState('m_cart', ['cart']),
+			...mapGetters('m_cart', ['total'])
+		},
+		watch: {
+			//定义total 侦听器,指向一个配置对象
+			total: {
+				// handler 属性用来定义侦听器的 function处理函数
+				handler(newVal) {
+					const findResult = this.options.find((x) => x.text === "购物车")
+					if (findResult) {
+						findResult.info = newVal
+					}
+				},
+				// 是否页面初次加载完毕后立即调用
+				immediate: true
+			}
+
+		},
 		data() {
 			return {
 				goods_info: [],
@@ -59,6 +85,8 @@
 
 		},
 		methods: {
+			//映射addToCart方法
+			...mapMutations('m_cart', ['addToCart']),
 			async getGoodsInfo(goods_id) {
 				const res = await uni.request({
 					url: "https://api-hmugo-web.itheima.net/api/public/v1/goods/detail",
@@ -67,7 +95,7 @@
 						goods_id: goods_id
 					}
 				})
-				console.log(res)
+				// console.log(res)
 				if (res[1].data.meta.status != 200) {
 					uni.$showMsg()
 					return
@@ -75,7 +103,7 @@
 				res[1].data.message.goods_introduce = res[1].data.message.goods_introduce.replace(/<img /g,
 					'<img style="display:block;"')
 				this.goods_info = res[1].data.message
-				console.log(this.goods_info)
+				// console.log(this.goods_info)
 			},
 			preview(i) {
 				uni.previewImage({
@@ -84,7 +112,7 @@
 				})
 			},
 			onClick(e) {
-				console.log(e)
+				// console.log(e)
 				if (e.content.text === "购物车") {
 					uni.switchTab({
 						url: "/pages/cart/cart"
@@ -92,7 +120,18 @@
 				}
 			},
 			buttonClick(e) {
-				console.log(e)
+				// console.log(e)
+				if (e.content.text === "加入购物车") {
+					const goods = {
+						goods_id: this.goods_info.goods_id,
+						goods_name: this.goods_info.goods_name,
+						goods_price: this.goods_info.goods_price,
+						goods_count: 1,
+						goods_small_logo: this.goods_info.goods_small_logo,
+						goods_state: true
+					}
+					this.addToCart(goods)
+				}
 			}
 		},
 

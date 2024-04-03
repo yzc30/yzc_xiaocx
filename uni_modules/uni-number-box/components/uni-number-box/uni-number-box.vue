@@ -146,6 +146,7 @@
 				let value = event.detail.value;
 				if (isNaN(value)) {
 					this.inputValue = this.min;
+					this.$emit("change", +this.inputValue);
 					return;
 				}
 				value = +value;
