@@ -29,7 +29,7 @@
 		"pages": [{
 				"path": "goods_detail/goods_detail",
 				"style": {
-					"navigationBarTitleText": "aaaaaaaaaaaa",
+					"navigationBarTitleText": "商品",
 					"enablePullDownRefresh": false
 				}
 			},
