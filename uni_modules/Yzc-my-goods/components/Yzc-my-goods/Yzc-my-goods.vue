@@ -7,7 +7,9 @@
 		<view class="goods-item-right">
 			<view class="goods-name">{{goods.goods_name}}</view>
 			<view class="goods-info-box">
-				<view class="goods-price">¥{{goods.goods_price*goods.goods_count|tofixed}}</view>
+				<view class="goods-price" v-if="goods.goods_count">
+					¥{{goods.goods_price*goods.goods_count|tofixed}}</view>
+				<view class="goods-price" v-if="!goods.goods_count">¥{{goods.goods_price|tofixed}}</view>
 				<uni-number-box :min="1" :value='goods.goods_count' v-if="showRadio"
 					@change="numberChangeHandler"></uni-number-box>
 			</view>
